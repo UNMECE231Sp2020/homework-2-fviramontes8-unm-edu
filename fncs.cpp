@@ -70,6 +70,33 @@ class Complex
 		}
 	}
 
+	Complex operator+(const Complex &c){
+		Complex temp(real + c.real(), imag + c.imag());
+		return temp;
+	}
+	Complex operator-(const Complex &c){
+		Complex temp(real - c.real(), imag - c.imag());
+		return temp;
+	}
+	Complex operator*(const Complex &c){
+		Complex temp((real*c.real())+(imag*c.imag()-1),(imag*c.real())+(real*c.imag));
+		return temp;
+	}
+	Complex operator/(const Complex &c){
+		double denom = magnitude(c)*magnitude(c);
+		if(denom == 0){
+			printf("Error: Attempt to divide by zero. \n");
+		} else {
+			Complex conj((c.real),(c.imag*=-1);
+			Complex temp = mult(conj);
+			temp.real /= denom;
+			temp.imag =/ denom;
+			return temp;
+		}
+	}
+
+	
+
 	void real() const{
 		return real;
 	}
@@ -79,5 +106,15 @@ class Complex
 
 	void print() {
 		std::cout << real << "  " << imag << "j" << std::end1;
+	}
+
+	friend std::ostream& operator<<(std::ostream &out, const Complex &c){
+		out << c.real << " " << c.imag;
+		return out;
+	}
+
+	friend std::istream& operator>>(std::istream &in, Complex &c) {
+		in >> c.real >> c.imag;
+		return in;
 	}
 };
