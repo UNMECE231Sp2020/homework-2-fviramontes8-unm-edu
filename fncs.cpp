@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include "header.hpp"
 
 class Complex
@@ -7,31 +8,43 @@ class Complex
 		double real;
 		double imag;
 	public:
+	
+	//Default constructor
 	Complex(){
-		std::cout << "Made by default constructor!" << std::endl;
+		std::cout << std::end1;
 		real = imag = 0;
 	}
+	//Parameterized Constructor
 	Complex(double r, double imag){
-		std::cout << "Made by parametrized constructor!" << std::endl;
+		std::cout << std::end1;
 		real = r;
 		imag = imag;
 	}
+
+	//Copy Constructor
 	Complex(const Complex &c){
 		real = c.real;
 		imag = c.imag;
 	}
+	//Deconstructor
 	~Complex(){
-		std::cout<<"decontructed"<<std::endl;
+		std::cout<<"Decontructed"<<std::endl;
 	}
-	void print(){
-		std::out<< real << "  " << imag << "j"<< std::endl;
+
+	
+	//Defining Magnitude and Phase
+	double magnitude(const Complex &c){
+		double temp = sqrt((c.real()*c.real())+(c.imag()*c.imag()));
+		return temp;
 	}
-	double real() const {
-		return real;
+	double phase(const Complex &c){
+		double _phase atan(c.imag/c.real);
+		_phase = _phase * (180/M_PI);
+		double ans = (_phase<0) ? -_phase : _phase;
+		return ans;
 	}
-	double imag() const{
-		return imag;
-	}
+
+	//Operator Overloading
 	Complex add(const Complex &c){
 		Complex temp(real + c.real(), imag + c.imag());
 		return temp;
@@ -41,15 +54,30 @@ class Complex
 		return temp;
 	}
 	Complex mult(const Complex &c){
-
+		Complex temp((real*c.real())+(imag*c.imag()-1),(imag*c.real())+(real*c.imag));
+		return temp;
 	}
 	Complex div(const Complex &c){
-
+		double denom = magnitude(c)*magnitude(c);
+		if(denom == 0){
+			printf("Error: Attempt to divide by zero. \n");
+		} else {
+			Complex conj((c.real),(c.imag*=-1);
+			Complex temp = mult(conj);
+			temp.real /= denom;
+			temp.imag =/ denom;
+			return temp;
+		}
 	}
-	double magnitude(){
 
+	void real() const{
+		return real;
 	}
-	double phase(){
+	void imag() const{
+		return imag;
+	}
 
-	}	
+	void print() {
+		std::cout << real << "  " << imag << "j" << std::end1;
+	}
 };
