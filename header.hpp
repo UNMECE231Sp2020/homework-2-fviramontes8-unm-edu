@@ -1,5 +1,7 @@
-
 //notes :https://www3.ntu.edu.sg/home/ehchua/programming/cpp/cp6_Inheritance.html
+#ifndef header
+#define header
+
 class Complex{
 	private:
 		double real;
@@ -7,6 +9,7 @@ class Complex{
 	public:
 
 	Complex();
+	Complex(double r);
 	Complex(double r, double imag);
 	Complex(const Complex &c);
 	~Complex();
@@ -19,7 +22,7 @@ class Complex{
 	double magnitude();
 	double phase();
 
-	void real() const;
-	void imag() const;
 	void print();
 };
+
+#endif

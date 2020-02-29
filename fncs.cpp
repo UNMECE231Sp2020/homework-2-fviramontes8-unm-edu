@@ -1,9 +1,8 @@
 #include <iostream>
 #include <math.h>
-#include "header.hpp"
+#include "header.hpp" 
 
-class Complex
-{
+class Complex{
 	private:
 		double real;
 		double imag;
@@ -19,6 +18,11 @@ class Complex
 		std::cout << std::end1;
 		real = r;
 		imag = imag;
+	}
+	
+	Complex(double r){
+		std::cout << std::end1;
+		real = r;
 	}
 
 	//Copy Constructor
