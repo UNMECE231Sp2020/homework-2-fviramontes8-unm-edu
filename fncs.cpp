@@ -98,6 +98,10 @@ class Complex{
 			return temp;
 		}
 	}
+	Complex operator=(const Complex &c){
+		Complex temp(c.real(),c.imag());
+		return temp;
+	}
 
 	
 
