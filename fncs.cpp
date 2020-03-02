@@ -37,12 +37,12 @@ class Complex{
 
 	
 	//Defining Magnitude and Phase
-	double magnitude(const Complex &c){
-		double temp = sqrt((c.real()*c.real())+(c.imag()*c.imag()));
+	double magnitude(){
+		double temp = sqrt((real()*real())+(imag()*imag()));
 		return temp;
 	}
 	double phase(const Complex &c){
-		double _phase atan(c.imag/c.real);
+		double _phase atan(imag/real);
 		_phase = _phase * (180/M_PI);
 		double ans = (_phase<0) ? -_phase : _phase;
 		return ans;
@@ -74,7 +74,7 @@ class Complex{
 		}
 	}
 
-	Complex operator+(const Complex &c){
+	Complex operator+(const Complex c){
 		Complex temp(real + c.real(), imag + c.imag());
 		return temp;
 	}
