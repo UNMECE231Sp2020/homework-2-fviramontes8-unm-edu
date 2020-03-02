@@ -9,7 +9,6 @@
 	}
 	//Parameterized Constructor
 	Complex::Complex(double r, double im){
-
 		real = r;
 		imag = im;
 	}
@@ -26,10 +25,26 @@
 	}
 	//Deconstructor
 	Complex::~Complex(){
-		;
+		
 	}
 
-	
+	//Print function
+	void Complex::print(){
+		if(imag>0){
+			std::cout << real << " +  " << imag << "j" << std::endl;
+		} else {
+			std::cout << real << " - " << imag << "j" << std::endl;
+		}
+	}		
+
+	//Getter functions
+	double Complex::getReal() const{
+		return real;
+	}
+        double Complex::getImag() const {
+		return imag;
+	}
+
 	//Defining Magnitude and Phase
 	double Complex::magnitude() const{
 		double temp = sqrt((real*real)+(imag*imag));
@@ -50,13 +65,15 @@
 
 	//Operator Overloading
 	Complex Complex::add(Complex c){
-		Complex temp(real+c.real, imag+c.imag);
+		Complex temp;
+		temp.real = real+c.real;
+		temp.imag = imag+c.imag;
 		return temp;
 	}
 	Complex Complex::sub(Complex c){
-		Complex temp(real - c.real, imag - c.imag);
-		temp.real = temp.real*-1;
-		temp.imag = temp.imag*-1;
+		Complex temp;
+		temp.real = real - c.real;
+		temp.imag = imag - c.imag;
 		return temp;
 	}
 	Complex Complex::mult(Complex c){
@@ -72,8 +89,8 @@
 			return 1;
 		} else {
 			Complex temp = mult(c.conj());
-			temp.real /= denom;
-			temp.imag /= denom;
+			temp.real = temp.real/denom;
+			temp.imag = temp.imag/denom;
 			return temp;
 		}
 	}
@@ -96,6 +113,7 @@
 		double denom = c.magnitude()*c.magnitude();
 		if(denom == 0){
 			printf("Error: Attempt to divide by zero. \n");
+			return 1;
 	} else {
 			Complex temp = mult(c.conj());
 			temp.real = temp.real/denom;
@@ -109,23 +127,8 @@
 		return *this;
 	}
 
-		
-	double Complex::getReal() const{
-		return real;
-	}
-	double Complex::getImag() const {
-		return imag;
-	}
 
-	void Complex::print() {
-		if(imag<0){
-		std::cout << real << " +  " << imag << "j" << std::endl;
-	} else {
-		std::cout << real << " - " << imag << "j" << std::endl;
-		}
-	}
-
-	std::ostream &operator<<(std::ostream &out,const Complex &c){
+	std::ostream &operator <<(std::ostream &out,const Complex &c){
 		if(c.imag>0){
 			out << c.real << " + " <<c.imag << "j";
 		} else {
@@ -134,7 +137,7 @@
 		return out;
 	}
 
-	std::istream  &operator>>(std::istream &in, Complex &c) {
+	std::istream  &operator >>(std::istream &in, Complex &c) {
 		in >> c.real>> c.imag;
 		return in;
 	}
