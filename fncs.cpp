@@ -30,10 +30,10 @@
 
 	//Print function
 	void Complex::print(){
-		if(imag>0){
-			std::cout << real << " +  " << imag << "j" << std::endl;
+		if(imag<0){
+			std::cout << real << " -  " << imag << "j" << std::endl;
 		} else {
-			std::cout << real << " - " << imag << "j" << std::endl;
+			std::cout << real << " + " << -imag << "j" << std::endl;
 		}
 	}		
 
@@ -64,25 +64,25 @@
 	}	
 
 	//Operator Overloading
-	Complex Complex::add(Complex c){
+	Complex Complex::add(const Complex &c){
 		Complex temp;
 		temp.real = real+c.real;
 		temp.imag = imag+c.imag;
 		return temp;
 	}
-	Complex Complex::sub(Complex c){
+	Complex Complex::sub(const Complex &c){
 		Complex temp;
 		temp.real = real - c.real;
 		temp.imag = imag - c.imag;
 		return temp;
 	}
-	Complex Complex::mult(Complex c){
+	Complex Complex::mult(const Complex &c){
 		Complex temp;
 		temp.real = real*c.real - imag*c.imag;
 		temp.imag = imag*c.real + real*c.imag;
 		return temp;
 	}
-	Complex Complex::div(Complex c){
+	Complex Complex::div(const Complex &c){
 		double denom = c.magnitude()*c.magnitude();
 		if(denom == 0){
 			printf("Error: Attempt to divide by zero. \n");
@@ -122,8 +122,8 @@
 		}
 	}
 	Complex Complex::operator=(const Complex &c){
-		real = real/c.real;
-		imag = imag/c.imag;
+		real = c.real;
+		imag = c.imag;
 		return *this;
 	}
 

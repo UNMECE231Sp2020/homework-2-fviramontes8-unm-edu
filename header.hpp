@@ -14,10 +14,10 @@ class Complex{
 	Complex(const Complex &c);
 	~Complex();
 
-	Complex add(Complex c);
-	Complex sub(Complex c);
-	Complex mult(Complex c);
-	Complex div(Complex c);
+	Complex add(const Complex &c);
+	Complex sub(const Complex &c);
+	Complex mult(const Complex &c);
+	Complex div(const Complex &c);
 	
 	double magnitude()const;
 	double phase();
