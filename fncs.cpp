@@ -26,7 +26,7 @@
 	}
 	//Deconstructor
 	Complex::~Complex(){
-		std::cout<<"Decontructed"<<std::endl;
+		std::cout<<real<<" " << imag<<" Decontructed"<<std::endl;
 	}
 
 	
@@ -44,8 +44,8 @@
 
 	//Operator Overloading
 	Complex Complex::add(const Complex &c){
-		Complex temp(real + c.real, imag + c.imag);
-		return temp;
+		Complex tmp(real + c.real, imag + c.imag);
+		return tmp;
 	}
 	Complex Complex::sub(const Complex &c){
 		Complex temp(real - c.real, imag - c.imag);
