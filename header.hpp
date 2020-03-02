@@ -21,6 +21,7 @@ class Complex{
 	
 	double magnitude()const;
 	double phase();
+	Complex conj() const;
 
 	void print();
 
@@ -30,7 +31,8 @@ class Complex{
 	Complex operator*(const Complex &c);
 	Complex operator/(const Complex &c);
 	Complex operator=(const Complex &c);
-
+	
+		
 	double getReal()const;
 	double getImag()const;
 	friend std::ostream& operator<<(std::ostream &out, const Complex &c);

@@ -17,6 +17,7 @@
 	Complex::Complex(double r){
 		std::cout << std::endl;
 		real = r;
+		imag = 0;
 	}
 
 	//Copy Constructor
@@ -26,7 +27,7 @@
 	}
 	//Deconstructor
 	Complex::~Complex(){
-		std::cout<<real<<" " << imag<<" Decontructed"<<std::endl;
+		;
 	}
 
 	
@@ -42,26 +43,36 @@
 		return ans;
 	}
 
+	Complex Complex::conj() const {
+		Complex temp(*this);
+		temp.imag = temp.imag*-1;
+		return temp;
+	}	
+
 	//Operator Overloading
 	Complex Complex::add(const Complex &c){
-		Complex tmp(real + c.real, imag + c.imag);
-		return tmp;
+		Complex temp(real+c.real, imag+c.imag);
+		return temp;
 	}
 	Complex Complex::sub(const Complex &c){
 		Complex temp(real - c.real, imag - c.imag);
+		temp.real = temp.real*-1;
+		temp.imag = temp.imag*-1;
 		return temp;
 	}
 	Complex Complex::mult(const Complex &c){
-		Complex temp((real*c.real)+(imag*c.imag-1),(imag*c.real)+(real*c.imag));
+		Complex temp;
+		temp.real = c.real*real - c.imag*imag;
+		temp.imag = c.imag*imag + c.real*real;
 		return temp;
 	}
 	Complex Complex::div(const Complex &c){
 		double denom = c.magnitude()*c.magnitude();
 		if(denom == 0){
 			printf("Error: Attempt to divide by zero. \n");
+			return 1;
 		} else {
-			Complex conj(c.real,c.imag*-1);
-			Complex temp = mult(conj);
+			Complex temp = mult(c.conj());
 			temp.real /= denom;
 			temp.imag /= denom;
 			return temp;
@@ -70,14 +81,17 @@
 
 	Complex Complex::operator+(const Complex &c){
 		Complex temp(real + c.real, imag + c.imag);
+//		std::cout << temp.real << " + " << temp.imag << "j" << std::endl;
 		return temp;
 	}
 	Complex Complex::operator-(const Complex &c){
 		Complex temp(real - c.real, imag - c.imag);
+		temp.real = temp.real*-1;
+		temp.imag = temp.imag*-1;
 		return temp;
 	}
 	Complex Complex::operator*(const Complex &c){
-		Complex temp((real*c.real)+(imag*c.imag-1),(imag*c.real)+(real*c.imag));
+		Complex temp(mult(c));
 		return temp;
 	}
 	Complex Complex::operator/(const Complex &c){
@@ -85,10 +99,9 @@
 		if(denom == 0){
 			printf("Error: Attempt to divide by zero. \n");
 	} else {
-			Complex conj((c.real),(c.imag*-1));
-			Complex temp = mult(conj);
-			temp.real /= denom;
-			temp.imag /= denom;
+			Complex temp = mult(c.conj());
+			temp.real = temp.real/denom;
+			temp.imag = temp.imag/denom;
 			return temp;
 		}
 	}
@@ -98,6 +111,7 @@
 		return *this;
 	}
 
+		
 	double Complex::getReal() const{
 		return real;
 	}
@@ -109,7 +123,7 @@
 		std::cout << real << "  " << imag << "j" << std::endl;
 	}
 
-	std::ostream &operator<<(std::ostream &out, const Complex &c){
+	std::ostream &operator<<(std::ostream &out,const Complex &c){
 		out << c.real << " " << c.imag;
 		return out;
 	}
