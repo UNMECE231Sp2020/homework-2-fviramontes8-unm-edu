@@ -2,11 +2,15 @@
 #ifndef header_hpp
 #define header_hpp
 class Complex{
+	private:
+	
+	double imag;
+	double real;
+	
 	public:
-
 	Complex();
 	Complex(double r);
-	Complex(double r, double imag);
+	Complex(double r, double im);
 	Complex(const Complex &c);
 	~Complex();
 
@@ -15,19 +19,20 @@ class Complex{
 	Complex mult(const Complex &c);
 	Complex div(const Complex &c);
 	
-	double magnitude();
+	double magnitude()const;
 	double phase();
 
 	void print();
 
 
-	Complex operator+(const Complex c);
+	Complex operator+(const Complex &c);
 	Complex operator-(const Complex &c);
 	Complex operator*(const Complex &c);
 	Complex operator/(const Complex &c);
 	Complex operator=(const Complex &c);
-	void real();
-	void imag();
+
+	double getReal()const;
+	double getImag()const;
 	friend std::ostream& operator<<(std::ostream &out, const Complex &c);
 	friend std::istream& operator>>(std::istream &in, Complex &c); 
 };
