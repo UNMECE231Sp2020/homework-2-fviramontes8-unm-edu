@@ -9,13 +9,12 @@
 	}
 	//Parameterized Constructor
 	Complex::Complex(double r, double im){
-		std::cout << std::endl;
+
 		real = r;
 		imag = im;
 	}
 	
 	Complex::Complex(double r){
-		std::cout << std::endl;
 		real = r;
 		imag = 0;
 	}
@@ -50,23 +49,23 @@
 	}	
 
 	//Operator Overloading
-	Complex Complex::add(const Complex &c){
+	Complex Complex::add(Complex c){
 		Complex temp(real+c.real, imag+c.imag);
 		return temp;
 	}
-	Complex Complex::sub(const Complex &c){
+	Complex Complex::sub(Complex c){
 		Complex temp(real - c.real, imag - c.imag);
 		temp.real = temp.real*-1;
 		temp.imag = temp.imag*-1;
 		return temp;
 	}
-	Complex Complex::mult(const Complex &c){
+	Complex Complex::mult(Complex c){
 		Complex temp;
 		temp.real = real*c.real - imag*c.imag;
 		temp.imag = imag*c.real + real*c.imag;
 		return temp;
 	}
-	Complex Complex::div(const Complex &c){
+	Complex Complex::div(Complex c){
 		double denom = c.magnitude()*c.magnitude();
 		if(denom == 0){
 			printf("Error: Attempt to divide by zero. \n");
@@ -119,11 +118,19 @@
 	}
 
 	void Complex::print() {
+		if(imag<0){
 		std::cout << real << " +  " << imag << "j" << std::endl;
+	} else {
+		std::cout << real << " - " << imag << "j" << std::endl;
+		}
 	}
 
 	std::ostream &operator<<(std::ostream &out,const Complex &c){
-		out << c.real << " + " << c.imag << "j";
+		if(c.imag>0){
+			out << c.real << " + " <<c.imag << "j";
+		} else {
+			out << c.real << " - " <<-1*c.imag << "j";
+		}
 		return out;
 	}
 
