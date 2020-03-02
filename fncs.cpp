@@ -62,8 +62,8 @@
 	}
 	Complex Complex::mult(const Complex &c){
 		Complex temp;
-		temp.real = c.real*real - c.imag*imag;
-		temp.imag = c.imag*imag + c.real*real;
+		temp.real = real*c.real - imag*c.imag;
+		temp.imag = imag*c.real + real*c.imag;
 		return temp;
 	}
 	Complex Complex::div(const Complex &c){
@@ -81,7 +81,6 @@
 
 	Complex Complex::operator+(const Complex &c){
 		Complex temp(real + c.real, imag + c.imag);
-//		std::cout << temp.real << " + " << temp.imag << "j" << std::endl;
 		return temp;
 	}
 	Complex Complex::operator-(const Complex &c){
@@ -120,11 +119,11 @@
 	}
 
 	void Complex::print() {
-		std::cout << real << "  " << imag << "j" << std::endl;
+		std::cout << real << " +  " << imag << "j" << std::endl;
 	}
 
 	std::ostream &operator<<(std::ostream &out,const Complex &c){
-		out << c.real << " " << c.imag;
+		out << c.real << " + " << c.imag << "j";
 		return out;
 	}
 
